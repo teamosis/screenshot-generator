@@ -1,10 +1,6 @@
 const build = require("./screenshot");
 
 build(
-  [
-    "https://preview.themeforest.net/item/pickbazar-react-graphql-ecommerce-template/full_screen_preview/25283305",
-    "https://preview.themeforest.net/item/shoponix-mern-next-ecommerce-store-template/full_screen_preview/26857951",
-    "https://demos.creative-tim.com/nextjs-material-kit-pro/presentation",
-  ],
+  ["example.com/theme-a", "example.com/theme-b"],
   false // overwrite value
 );

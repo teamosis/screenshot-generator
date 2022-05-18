@@ -6,7 +6,6 @@
   "author": "themefisher",
   "dependencies": {
     "fs-extra": "^10.1.0",
-    "get-url-title": "^2.0.0",
     "ora": "^5.3.0",
     "pageres": "^6.3.1",
     "puppeteer": "^14.1.0",
