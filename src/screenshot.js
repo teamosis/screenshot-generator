@@ -17,6 +17,7 @@ const slug = (str) => {
     .replace(/\./g, "-")
     .replace(/\s/g, "-")
     .replace(/\//g, "-")
+    .replace(/-$/g, "")
     .replace("http:--", "")
     .replace("https:--", "");
 };
