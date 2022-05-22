@@ -1,6 +1,9 @@
 const build = require("./screenshot");
 
 build(
-  ["example.com/theme-a", "example.com/theme-b"],
+  [
+    "https://demo.themefisher.com/airspace/",
+    "https://demo.themefisher.com/brandi/",
+  ],
   false // overwrite value
 );

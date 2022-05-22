@@ -67,7 +67,7 @@ const generateThumbnail = async (demo, overwrite) => {
   const imageName = path.parse(hiresImage).name;
   const outputImage = path.join(
     config.thumbnailImagesFolder,
-    `${imageName}.jpg`
+    `${imageName}.png`
   );
 
   if (!hiresImage) {
