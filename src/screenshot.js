@@ -17,6 +17,7 @@ const slug = (str) => {
     .replace(/\./g, "-")
     .replace(/\s/g, "-")
     .replace(/\//g, "-")
+    .replace(/[0-9]/g, "")
     .replace(/-$/g, "")
     .replace("http:--", "")
     .replace("https:--", "");
@@ -34,12 +35,17 @@ const captureScreenshot = async (demo, overwrite) => {
     return false;
   }
 
+  let size = ["1800x1200"];
+  if (themeKey.includes("preview-themeforest")) {
+    size = ["1800x1255"];
+  }
+
   try {
     const page = await new Pageres({
       delay: 2,
       filename: themeKey,
     })
-      .src(demo, ["1800x1200"], {
+      .src(demo, size, {
         crop: true,
       })
       .dest(config.hiresImagesFolder)
@@ -85,7 +91,7 @@ const generateThumbnail = async (demo, overwrite) => {
         width: 900,
         height: 600,
         fit: "cover",
-        position: "top",
+        position: "bottom",
       })
       .jpeg({
         quality: 85,
