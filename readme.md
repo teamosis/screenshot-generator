@@ -6,10 +6,20 @@
 yarn install
 ```
 
-**Note: For M1 mac**
+**Note: For M1 Mac Only**
 
-1. First setup like [this](https://linguinecode.com/post/how-to-fix-m1-mac-puppeteer-chromium-arm64-bug)
-2. Then, you need to find and replace all `/usr/bin/chromium-browser` with `/opt/homebrew/bin/chromium` using VS-code after `yarn install`.
+1. First install chromium `brew install chromium`
+1. Run `code ~/.zshrc`
+1. Add those lines into the open file
+
+    ```
+    export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+    export PUPPETEER_EXECUTABLE_PATH=`which chromium`
+    ```
+
+1. Run `xattr -cr /Applications/Chromium.app`
+1. Open this project and run `yarn install`
+1. Replace all `/usr/bin/chromium-browser` with `/opt/homebrew/bin/chromium`
 
 ## Run the script
 

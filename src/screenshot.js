@@ -42,7 +42,7 @@ const captureScreenshot = async (demo, overwrite) => {
 
   try {
     const page = await new Pageres({
-      delay: 2,
+      delay: 5,
       filename: themeKey,
     })
       .src(demo, size, {
