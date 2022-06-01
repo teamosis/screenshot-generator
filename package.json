@@ -12,6 +12,6 @@
     "sharp": "^0.30.4"
   },
   "scripts": {
-    "dev": "node ./src/app.js"
+    "start": "node ./src/app.js"
   }
 }

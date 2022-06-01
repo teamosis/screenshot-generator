@@ -26,5 +26,5 @@ yarn install
 enter your urls as an array in the `src/app.js` file. the run the script
 
 ```bash
-yarn dev
+yarn start
 ```

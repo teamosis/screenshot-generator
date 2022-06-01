@@ -35,7 +35,7 @@ const captureScreenshot = async (demo, overwrite) => {
     return false;
   }
 
-  let size = ["1800x1200"];
+  let size = ["1600x1200"];
   if (themeKey.includes("preview-themeforest")) {
     size = ["1800x1255"];
   }
@@ -88,8 +88,8 @@ const generateThumbnail = async (demo, overwrite) => {
     spinner.text = `${imageName} => processing thumbnail`;
     await sharp(hiresImage)
       .resize({
-        width: 900,
-        height: 600,
+        width: 1200,
+        height: 900,
         fit: "cover",
         position: "bottom",
       })
