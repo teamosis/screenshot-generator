@@ -2,10 +2,8 @@ const build = require("./screenshot");
 
 build(
   [
-    "https://demo.themefisher.com/wishfund/",
-    "https://demo.themefisher.com/restaurant/",
-    "https://demo.themefisher.com/classimax/",
-    "https://demo.themefisher.com/elite-shop/",
+    "https://demo.themefisher.com/constra/",
+    "https://demo.themefisher.com/biztrox/",
   ],
   false // overwrite value
 );
