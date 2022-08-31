@@ -3,8 +3,8 @@ const fs = require("fs-extra");
 const path = require("path");
 const Pageres = require("pageres");
 const sharp = require("sharp");
-const ora = require("ora"); // use version ^5.3.0
-const spinner = ora("Loading");
+const Spinner = require("cli-spinner").Spinner;
+const spinner = new Spinner("Loading");
 
 const config = {
   hiresImagesFolder: path.join(process.cwd(), "/screenshots/hires"),
@@ -63,7 +63,7 @@ const generateScreenshots = async (demos, overwrite) => {
   for (const demo of demos) {
     await captureScreenshot(demo, overwrite);
   }
-  spinner.succeed("Success - Capturing Screenshots");
+  spinner.stop("Success - Capturing Screenshots");
 };
 
 const generateThumbnail = async (demo, overwrite) => {
@@ -108,7 +108,7 @@ const generateThumbnails = async (demos, overwrite) => {
   for (const demo of demos) {
     await generateThumbnail(demo, overwrite);
   }
-  spinner.succeed("Success - Generating Thumbnails");
+  spinner.stop("Success - Generating Thumbnails");
 };
 
 async function build(demos, overwrite) {
