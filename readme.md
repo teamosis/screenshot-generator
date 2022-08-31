@@ -19,7 +19,6 @@ yarn install
 
 1. Run `xattr -cr /Applications/Chromium.app`
 1. Open this project and run `yarn install`
-1. Replace all `/usr/bin/chromium-browser` with `/opt/homebrew/bin/chromium`
 
 ## Run the script
 

@@ -1,4 +1,5 @@
 import fs from "fs-extra";
+import Meta from "html-metadata-parser";
 import ora from "ora";
 import Pageres from "pageres";
 import path from "path";
@@ -8,23 +9,28 @@ const spinner = ora("Loading");
 const config = {
   hiresImagesFolder: path.join(process.cwd(), "/screenshots/hires"),
   thumbnailImagesFolder: path.join(process.cwd(), "/screenshots/thumbnail"),
+  screenshotHeight: "1600",
+  screenshotWidth: "1200",
+  thumbnailHeight: "1200",
+  thumbnailWidth: "900",
 };
 
-const slug = (str) => {
-  return str
+const slugify = (str) =>
+  str
     .toLowerCase()
-    .replace(/\./g, "-")
-    .replace(/\s/g, "-")
-    .replace(/\//g, "-")
-    .replace(/[0-9]/g, "")
-    .replace(/-$/g, "")
-    .replace("http:--", "")
-    .replace("https:--", "");
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+const slug = async (url) => {
+  const data = await Meta.parser(url);
+  return slugify(data.meta.title);
 };
 
 const captureScreenshot = async (demo, overwrite) => {
   let themeKey = new URL(demo);
-  themeKey = `${slug(themeKey.href)}`;
+  themeKey = `${await slug(themeKey.href)}`;
   const themeImage = `${themeKey}.png`;
 
   if (
@@ -34,17 +40,16 @@ const captureScreenshot = async (demo, overwrite) => {
     return false;
   }
 
-  let size = ["1600x1200"];
-  if (themeKey.includes("preview-themeforest")) {
-    size = ["1800x1255"];
-  }
+  const screenshotSize = [
+    config.screenshotHeight + "x" + config.screenshotWidth,
+  ];
 
   try {
     const page = await new Pageres({
       delay: 2,
       filename: themeKey,
     })
-      .source(demo, size, {
+      .source(demo, screenshotSize, {
         crop: true,
       })
       .destination(config.hiresImagesFolder)
@@ -67,7 +72,7 @@ const generateScreenshots = async (demos, overwrite) => {
 
 const generateThumbnail = async (demo, overwrite) => {
   let themeKey = new URL(demo);
-  themeKey = `${slug(themeKey.href)}`;
+  themeKey = `${await slug(themeKey.href)}`;
   const hiresImage = path.join(config.hiresImagesFolder, `${themeKey}.png`);
   const imageName = path.parse(hiresImage).name;
   const outputImage = path.join(
@@ -87,8 +92,8 @@ const generateThumbnail = async (demo, overwrite) => {
     spinner.text = `${imageName} => processing thumbnail`;
     await sharp(hiresImage)
       .resize({
-        width: 1200,
-        height: 900,
+        width: config.thumbnailWidth,
+        height: config.thumbnailHeight,
         fit: "cover",
         position: "bottom",
       })
