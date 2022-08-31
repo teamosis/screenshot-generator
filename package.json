@@ -2,13 +2,14 @@
   "license": "MIT",
   "name": "screenshot-generator",
   "version": "1.0.0",
+  "type": "module",
   "description": "generate screenshots from urls",
   "author": "themefisher",
   "dependencies": {
-    "cli-spinner": "^0.2.10",
+    "ora": "^6.1.2",
     "fs-extra": "^10.1.0",
-    "pageres": "^6.3.1",
-    "puppeteer": "^16.1.0",
+    "pageres": "^7.0.0",
+    "puppeteer": "^17.0.0",
     "sharp": "^0.30.7"
   },
   "scripts": {

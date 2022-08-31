@@ -1,10 +1,9 @@
-#!/usr/bin/env node
-const fs = require("fs-extra");
-const path = require("path");
-const Pageres = require("pageres");
-const sharp = require("sharp");
-const Spinner = require("cli-spinner").Spinner;
-const spinner = new Spinner("Loading");
+import fs from "fs-extra";
+import ora from "ora";
+import Pageres from "pageres";
+import path from "path";
+import sharp from "sharp";
+const spinner = ora("Loading");
 
 const config = {
   hiresImagesFolder: path.join(process.cwd(), "/screenshots/hires"),
@@ -42,13 +41,13 @@ const captureScreenshot = async (demo, overwrite) => {
 
   try {
     const page = await new Pageres({
-      delay: 5,
+      delay: 2,
       filename: themeKey,
     })
-      .src(demo, size, {
+      .source(demo, size, {
         crop: true,
       })
-      .dest(config.hiresImagesFolder)
+      .destination(config.hiresImagesFolder)
       .run();
     spinner.text = `${demo} => capturing`;
     return page;
@@ -63,7 +62,7 @@ const generateScreenshots = async (demos, overwrite) => {
   for (const demo of demos) {
     await captureScreenshot(demo, overwrite);
   }
-  spinner.stop("Success - Capturing Screenshots");
+  spinner.succeed("Success - Capturing Screenshots");
 };
 
 const generateThumbnail = async (demo, overwrite) => {
@@ -108,7 +107,7 @@ const generateThumbnails = async (demos, overwrite) => {
   for (const demo of demos) {
     await generateThumbnail(demo, overwrite);
   }
-  spinner.stop("Success - Generating Thumbnails");
+  spinner.succeed("Success - Generating Thumbnails");
 };
 
 async function build(demos, overwrite) {
@@ -116,4 +115,4 @@ async function build(demos, overwrite) {
   await generateThumbnails(demos, overwrite);
 }
 
-module.exports = build;
+export default build;

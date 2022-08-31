@@ -1,4 +1,4 @@
-const build = require("./screenshot");
+import build from "./screenshot.js";
 
 build(
   [
