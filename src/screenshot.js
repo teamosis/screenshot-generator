@@ -9,10 +9,10 @@ const spinner = ora("Loading");
 const config = {
   hiresImagesFolder: path.join(process.cwd(), "/screenshots/hires"),
   thumbnailImagesFolder: path.join(process.cwd(), "/screenshots/thumbnail"),
-  screenshotHeight: "1600",
-  screenshotWidth: "1200",
-  thumbnailHeight: "1200",
-  thumbnailWidth: "900",
+  screenshotHeight: 1200,
+  screenshotWidth: 1600,
+  thumbnailHeight: 900,
+  thumbnailWidth: 1200,
 };
 
 const slugify = (str) =>
@@ -41,7 +41,7 @@ const captureScreenshot = async (demo, overwrite) => {
   }
 
   const screenshotSize = [
-    config.screenshotHeight + "x" + config.screenshotWidth,
+    config.screenshotWidth + "x" + config.screenshotHeight,
   ];
 
   try {
